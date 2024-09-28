@@ -63,7 +63,7 @@ export const register = (name: string, email: string, password: string) => {
     try {
       dispatch({ type: REGISTER_REQUEST });
 
-      const { data } = await axios.post(`${API_BASE_URL}/register`, {
+      const { data } = await axios.post(`${API_BASE_URL}/users/register`, {
         name,
         email,
         password,
@@ -72,6 +72,11 @@ export const register = (name: string, email: string, password: string) => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: { token: data.token, user: data.user },
+      });
+
+      enqueueSnackbar({
+        message: "Logged in successfully!",
+        variant: "success",
       });
 
       localStorage.setItem("token", data.token);
@@ -86,6 +91,11 @@ export const register = (name: string, email: string, password: string) => {
       dispatch({
         type: REGISTER_FAILURE,
         payload: errorMessage,
+      });
+
+      enqueueSnackbar({
+        message: errorMessage,
+        variant: "error",
       });
     }
   };
