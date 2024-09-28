@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/reducers";
 import { login } from "../store/actions/auth.actions";
 import { useAppDispatch } from "../hooks/hooks";
+import Link from "next/link";
 
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -57,6 +58,14 @@ const LoginPage: React.FC = () => {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+        <div className="mt-2 text-center">
+          <p className="font-nunito text-gray-600">
+            Don't have an account?{" "}
+            <Link href="/login" className="text-blue-500">
+              Register here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
