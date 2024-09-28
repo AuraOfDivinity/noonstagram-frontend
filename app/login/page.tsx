@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
         <div className="mt-2 text-center">
           <p className="font-nunito text-gray-600">
             Don't have an account?{" "}
-            <Link href="/login" className="text-blue-500">
+            <Link href="/register" className="text-blue-500">
               Register here
             </Link>
           </p>
