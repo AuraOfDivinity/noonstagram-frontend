@@ -10,6 +10,7 @@ import {
 } from "@/app/constants/auth.constants";
 import { AuthActions } from "@/app/types/auth-action.types";
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 import { Dispatch } from "redux";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -30,11 +31,20 @@ export const login = (email: string, password: string) => {
         payload: { token: data.token, user: data.user },
       });
 
+      enqueueSnackbar({
+        message: "Logged in successfully!",
+        variant: "success",
+      });
+
       localStorage.setItem("token", data.token);
     } catch (error) {
       let errorMessage = "Login failed";
       if (axios.isAxiosError(error)) {
         errorMessage = error.response?.data?.message || error.message;
+        enqueueSnackbar({
+          message: errorMessage,
+          variant: "error",
+        });
       } else if (error instanceof Error) {
         errorMessage = error.message;
       }
