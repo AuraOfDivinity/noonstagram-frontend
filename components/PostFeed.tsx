@@ -1,12 +1,12 @@
 // src/components/PostFeed.tsx
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/reducers";
 import PostItem from "./PostItem";
 import { fetchPosts } from "@/app/store/actions/post.actions";
 import { useAppDispatch } from "@/hooks/hooks";
 
-const PostFeed: React.FC = () => {
+const PostFeed: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
   const {
     posts = [],
@@ -14,9 +14,17 @@ const PostFeed: React.FC = () => {
     error,
   } = useSelector((state: RootState) => state.post);
 
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth); // Access auth state
+
+  const fetchPostsIfAuthenticated = useCallback(() => {
+    if (isAuthenticated) {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, isAuthenticated]);
+
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    fetchPostsIfAuthenticated();
+  }, [fetchPostsIfAuthenticated]); // Use the callback in the dependency array
 
   if (loading) {
     return <p>Loading posts...</p>;
@@ -29,6 +37,6 @@ const PostFeed: React.FC = () => {
       ))}
     </div>
   );
-};
+});
 
 export default PostFeed;
