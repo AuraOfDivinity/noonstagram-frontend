@@ -15,7 +15,7 @@ import { RootState } from "../reducers";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const submitComment =
-  (postId: string, commentText: string) =>
+  (postId: number, commentText: string) =>
   async (dispatch: Dispatch, getState: () => RootState) => {
     try {
       dispatch({ type: ADD_COMMENT_REQUEST });

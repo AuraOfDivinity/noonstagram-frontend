@@ -6,7 +6,7 @@ import { useAppDispatch } from "@/hooks/hooks";
 import { submitComment } from "@/app/store/actions/comment.action";
 
 interface CommentSectionProps {
-  postId: string;
+  postId: number;
   comments: Array<Comment>;
 }
 
@@ -24,20 +24,20 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   };
 
   return (
-    <div className="mt-4">
+    <div>
       {/* New Comment Input */}
-      <form onSubmit={handleCommentSubmit} className="mb-4 flex w-full">
+      <form onSubmit={handleCommentSubmit} className="flex w-full">
         <input
           type="text"
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
-          className="border p-2 w-3/4 font-lora text-md rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="border p-2 w-3/4 font-lora text-md rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
           placeholder="Add a comment..."
         />
 
         <button
           type="submit"
-          className="p-2 bg-blue-500 text-white font-montserrat w-1/4 rounded-r-md text-sm"
+          className="p-2 bg-gray-400 text-white font-montserrat w-1/4 rounded-r-md text-sm"
         >
           Comment
         </button>
