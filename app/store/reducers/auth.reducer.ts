@@ -1,5 +1,3 @@
-// src/store/reducers/authReducer.ts
-
 import {
   LOGIN_REQUEST,
   REGISTER_REQUEST,

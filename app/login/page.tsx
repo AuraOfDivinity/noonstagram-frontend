@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
+import { useRouter } from "next/navigation";
 import { RootState } from "../store/reducers";
 import { login } from "../store/actions/auth.actions";
 import { useAppDispatch } from "../../hooks/hooks";
@@ -13,10 +13,11 @@ const LoginPage: React.FC = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login(email, password)); // Dispatch the login action
+    dispatch(login(email, password, router));
   };
 
   return (

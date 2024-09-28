@@ -1,4 +1,3 @@
-// src/store/actions/authActions.ts
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -10,13 +9,18 @@ import {
 } from "@/constants/auth.constants";
 import { AuthActions } from "@/types/auth-action.types";
 import axios from "axios";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { enqueueSnackbar } from "notistack";
 import { Dispatch } from "redux";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 // Thunk action for login
-export const login = (email: string, password: string) => {
+export const login = (
+  email: string,
+  password: string,
+  router: AppRouterInstance
+) => {
   return async (dispatch: Dispatch<AuthActions>) => {
     try {
       dispatch({ type: LOGIN_REQUEST });
@@ -37,6 +41,8 @@ export const login = (email: string, password: string) => {
       });
 
       localStorage.setItem("token", data.token);
+
+      router.push("/feed");
     } catch (error) {
       let errorMessage = "Login failed";
       if (axios.isAxiosError(error)) {
@@ -57,12 +63,10 @@ export const login = (email: string, password: string) => {
   };
 };
 
-// Similarly adjust the register action
 export const register = (name: string, email: string, password: string) => {
   return async (dispatch: Dispatch<AuthActions>) => {
     try {
       dispatch({ type: REGISTER_REQUEST });
-
       const { data } = await axios.post(`${API_BASE_URL}/users/register`, {
         name,
         email,
