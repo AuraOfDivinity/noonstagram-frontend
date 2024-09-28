@@ -33,7 +33,7 @@ const PostFeed: React.FC = React.memo(() => {
   return (
     <div className="flex flex-col items-center sm:m-2">
       {posts.map((post) => (
-        <PostItem key={post._id} post={post} />
+        <PostItem key={post.id} post={post} />
       ))}
     </div>
   );
