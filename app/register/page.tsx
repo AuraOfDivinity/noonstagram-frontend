@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { RootState } from "../store/reducers";
 import { register } from "../store/actions/auth.actions";
-import { useAppDispatch } from "../hooks/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 
 const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch();

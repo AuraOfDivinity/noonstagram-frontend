@@ -8,9 +8,9 @@ import {
   LOGIN_FAILURE,
   REGISTER_FAILURE,
   LOGOUT,
-} from "@/app/constants/auth.constants";
-import { AuthActions } from "@/app/types/auth-action.types";
-import { AuthState } from "@/app/types/auth-state.types";
+} from "@/constants/auth.constants";
+import { AuthActions } from "@/types/auth-action.types";
+import { AuthState } from "@/types/auth-state.types";
 
 const initialState: AuthState = {
   user: null,

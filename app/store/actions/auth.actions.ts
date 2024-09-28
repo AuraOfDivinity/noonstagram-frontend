@@ -7,8 +7,8 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
   LOGOUT,
-} from "@/app/constants/auth.constants";
-import { AuthActions } from "@/app/types/auth-action.types";
+} from "@/constants/auth.constants";
+import { AuthActions } from "@/types/auth-action.types";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
 import { Dispatch } from "redux";

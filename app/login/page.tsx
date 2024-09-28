@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import { RootState } from "../store/reducers";
 import { login } from "../store/actions/auth.actions";
-import { useAppDispatch } from "../hooks/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 import Link from "next/link";
 
 const LoginPage: React.FC = () => {
@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-6 rounded shadow-md w-96">
-        <h1 className="text-xl font-bold mb-4  font-montserrat">Login</h1>
+        <h1 className="text-2xl font-bold mb-4  font-lora">Login</h1>
         <form onSubmit={handleLogin} className="font-nunito">
           <div className="mb-4">
             <label htmlFor="email" className="block mb-1">
