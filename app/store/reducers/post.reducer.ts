@@ -1,15 +1,20 @@
-import { UPDATE_POST_WITH_COMMENT } from "@/constants/comment.constants";
 import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
   LIKE_POST_SUCCESS,
+  FETCH_LIKED_POSTS_REQUEST,
+  FETCH_LIKED_POSTS_SUCCESS,
+  FETCH_LIKED_POSTS_FAILURE,
+  UNLIKE_POST_SUCCESS,
 } from "@/constants/post.constants";
+import { UPDATE_POST_WITH_COMMENT } from "@/constants/comment.constants";
 import { PostAction } from "@/types/post-action.types";
 import { PostState } from "@/types/post-state.types";
 
 const initialState: PostState = {
   posts: [],
+  likedPosts: [], // Add a new array to hold liked posts
   loading: false,
   error: null,
 };
@@ -32,7 +37,21 @@ export const postReducer = (
           post.id === action.payload.id ? action.payload : post
         ),
       };
+    case FETCH_LIKED_POSTS_REQUEST:
+      return { ...state, loading: true };
+    case FETCH_LIKED_POSTS_SUCCESS:
+      return { ...state, loading: false, likedPosts: action.payload };
+    case FETCH_LIKED_POSTS_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case UNLIKE_POST_SUCCESS:
+      return {
+        ...state,
+        likedPosts: state.likedPosts.filter(
+          (post) => post.id !== action.payload.id
+        ),
+      };
     case UPDATE_POST_WITH_COMMENT:
+      console.log("inside update post with comment");
       return {
         ...state,
         posts: state.posts.map((post) =>

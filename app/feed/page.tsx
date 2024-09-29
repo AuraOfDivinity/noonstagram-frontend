@@ -13,8 +13,8 @@ const FeedPage: React.FC = () => {
       <NavBar />
 
       {/* Main content */}
-      <div className="flex justify-center w-full">
-        <div className="w-full sm:w-1/2 md:w-1/3">
+      <div className="flex flex-grow justify-center w-full">
+        <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
           <PostFeed />
         </div>
       </div>
