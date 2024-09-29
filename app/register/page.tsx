@@ -10,7 +10,7 @@ import { useAppDispatch } from "../../hooks/hooks";
 
 const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { loading, error } = useSelector((state: RootState) => state.auth);
+  const { loading } = useSelector((state: RootState) => state.auth);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

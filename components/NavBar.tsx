@@ -2,11 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { useAppSelector } from "@/hooks/hooks";
+// import { useAppSelector } from "@/hooks/hooks";
 import { usePathname } from "next/navigation";
 
 const Navbar: React.FC = () => {
-  const auth = useAppSelector((state) => state.auth);
+  // const auth = useAppSelector((state) => state.auth);
   const pathname = usePathname();
 
   // TODO: handle logic

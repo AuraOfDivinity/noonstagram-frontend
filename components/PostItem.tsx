@@ -1,6 +1,4 @@
 import React from "react";
-import { useAppDispatch } from "@/hooks/hooks";
-import { likePost } from "@/app/store/actions/post.actions";
 import { Post } from "@/types/post.types";
 import { formatDistanceToNow } from "date-fns";
 import CommentSection from "./CommentSection";
@@ -11,8 +9,6 @@ interface PostItemProps {
 }
 
 const PostItem: React.FC<PostItemProps> = ({ post }) => {
-  const dispatch = useAppDispatch();
-
   const createdAt = post.created_at ? new Date(post.created_at) : new Date();
   const timeAgo = formatDistanceToNow(createdAt, { addSuffix: true });
 

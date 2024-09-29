@@ -1,8 +1,6 @@
 // src/store/store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
 import rootReducer from "./reducers"; // Import your combined reducer
-import thunk from "redux-thunk";
 
 export const makeStore = () =>
   configureStore({

@@ -7,12 +7,7 @@ import { useAppDispatch } from "@/hooks/hooks";
 
 const PostFeed: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
-  const {
-    posts = [],
-    loading,
-    error,
-  } = useSelector((state: RootState) => state.post);
-
+  const { posts = [], loading } = useSelector((state: RootState) => state.post);
   const { isAuthenticated } = useSelector((state: RootState) => state.auth); // Access auth state
 
   const fetchPostsIfAuthenticated = useCallback(() => {
@@ -37,5 +32,6 @@ const PostFeed: React.FC = React.memo(() => {
     </div>
   );
 });
+PostFeed.displayName = "PostFeed";
 
 export default PostFeed;

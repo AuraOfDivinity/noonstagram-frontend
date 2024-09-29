@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { loading, error } = useSelector((state: RootState) => state.auth); // Access auth state
+  const { loading } = useSelector((state: RootState) => state.auth); // Access auth state
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
         </form>
         <div className="mt-2 text-center">
           <p className="font-nunito text-gray-600">
-            Don't have an account?{" "}
+            Don&apos;t have an account?
             <Link href="/register" className="text-blue-500">
               Register here
             </Link>
