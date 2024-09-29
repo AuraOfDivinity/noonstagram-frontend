@@ -8,6 +8,9 @@ import {
   FETCH_LIKED_POSTS_FAILURE,
   UNLIKE_POST_SUCCESS,
   REMOVE_FROM_LIKED_POSTS,
+  CREATE_POST_FAILURE,
+  CREATE_POST_REQUEST,
+  CREATE_POST_SUCCESS,
 } from "@/constants/post.constants";
 import { UPDATE_POST_WITH_COMMENT } from "@/constants/comment.constants";
 import { PostAction } from "@/types/post-action.types";
@@ -15,7 +18,7 @@ import { PostState } from "@/types/post-state.types";
 
 const initialState: PostState = {
   posts: [],
-  likedPosts: [], // Add a new array to hold liked posts
+  likedPosts: [],
   loading: false,
   error: null,
 };
@@ -25,6 +28,16 @@ export const postReducer = (
   action: PostAction
 ): PostState => {
   switch (action.type) {
+    case CREATE_POST_REQUEST:
+      return { ...state, loading: true };
+    case CREATE_POST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        posts: [action.payload, ...state.posts],
+      };
+    case CREATE_POST_FAILURE:
+      return { ...state, loading: false, error: action.payload };
     case FETCH_POSTS_REQUEST:
       return { ...state, loading: true };
     case FETCH_POSTS_SUCCESS:

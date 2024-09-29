@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import withPopup from "@/app/hoc/withPopup";
-import { AiFillHeart } from "react-icons/ai"; // Importing AiFillHeart icon
-import LikeButton from "./LikeButton";
+import { AiFillHeart } from "react-icons/ai";
 import { useAppDispatch } from "@/hooks/hooks";
 import { unlikePost } from "@/app/store/actions/post.actions";
 
 interface LikedImageProps {
   id: number;
   imageUrl: string;
-  // onUnlike: (id: number) => void; // Function to handle unliking the post
 }
 
 const LikedImage: React.FC<LikedImageProps> = ({ id, imageUrl }) => {
@@ -16,16 +14,16 @@ const LikedImage: React.FC<LikedImageProps> = ({ id, imageUrl }) => {
   const dispatch = useAppDispatch();
 
   const handleUnlikeClick = () => {
-    setUnlikePopupVisible(true); // Show the popup
+    setUnlikePopupVisible(true);
   };
 
   const confirmUnlike = () => {
     dispatch(unlikePost(id));
-    setUnlikePopupVisible(false); // Close the popup
+    setUnlikePopupVisible(false);
   };
 
   const cancelUnlike = () => {
-    setUnlikePopupVisible(false); // Just close the popup
+    setUnlikePopupVisible(false);
   };
 
   return (
@@ -40,7 +38,8 @@ const LikedImage: React.FC<LikedImageProps> = ({ id, imageUrl }) => {
         onClick={handleUnlikeClick}
         className="absolute bottom-2 right-2 p-2 bg-white rounded-full shadow-lg"
       >
-        <AiFillHeart className="text-red-500 h-6 w-6" />
+        <AiFillHeart className="text-red-500 h-6 w-6 transition-transform duration-300 hover:scale-110" />
+        {/* Scale on hover */}
       </button>
 
       {/* Popup for confirming unlike */}
@@ -56,7 +55,6 @@ const LikedImage: React.FC<LikedImageProps> = ({ id, imageUrl }) => {
   );
 };
 
-// Create a Popup for unlike confirmation
-const UnlikePopup = withPopup(() => null); // Using the withPopup HOC
+const UnlikePopup = withPopup(() => null);
 
 export default LikedImage;

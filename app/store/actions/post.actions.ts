@@ -8,6 +8,9 @@ import {
   FETCH_LIKED_POSTS_REQUEST,
   FETCH_LIKED_POSTS_SUCCESS,
   REMOVE_FROM_LIKED_POSTS,
+  CREATE_POST_SUCCESS,
+  CREATE_POST_FAILURE,
+  CREATE_POST_REQUEST,
 } from "@/constants/post.constants";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
@@ -99,12 +102,12 @@ export const unlikePost =
       );
       dispatch({
         type: UNLIKE_POST_SUCCESS,
-        payload: data.post, // Ensure payload contains the post ID
+        payload: data.post,
       });
 
       dispatch({
         type: REMOVE_FROM_LIKED_POSTS,
-        payload: data.post, // Ensure payload contains the post ID
+        payload: data.post,
       });
 
       enqueueSnackbar({
@@ -118,13 +121,13 @@ export const unlikePost =
 
 export const fetchLikedPosts =
   () => async (dispatch: Dispatch, getState: () => RootState) => {
-    const { token } = getState().auth; // Extract the token from the auth state
+    const { token } = getState().auth;
     try {
-      dispatch({ type: FETCH_LIKED_POSTS_REQUEST }); // Dispatch request action
+      dispatch({ type: FETCH_LIKED_POSTS_REQUEST });
 
       const { data } = await axios.get(`${API_BASE_URL}/posts/liked`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Set authorization header
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -133,15 +136,15 @@ export const fetchLikedPosts =
         payload: data,
       });
     } catch (error) {
-      let errorMessage = "Fetch Liked Posts Failed."; // Default error message
+      let errorMessage = "Fetch Liked Posts Failed.";
       if (axios.isAxiosError(error)) {
-        errorMessage = error.response?.data?.message || error.message; // Extract error message
+        errorMessage = error.response?.data?.message || error.message;
         enqueueSnackbar({
           message: errorMessage,
           variant: "error",
         });
       } else if (error instanceof Error) {
-        errorMessage = error.message; // Handle general errors
+        errorMessage = error.message;
         enqueueSnackbar({
           message: errorMessage,
           variant: "error",
@@ -150,6 +153,51 @@ export const fetchLikedPosts =
 
       dispatch({
         type: FETCH_LIKED_POSTS_FAILURE,
+        payload: errorMessage, // Dispatch failure action with error message
+      });
+    }
+  };
+
+export const createPost =
+  (formData: FormData) =>
+  async (dispatch: Dispatch, getState: () => RootState) => {
+    const { token } = getState().auth;
+
+    try {
+      dispatch({ type: CREATE_POST_REQUEST });
+
+      const { data } = await axios.post(`${API_BASE_URL}/posts`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      dispatch({
+        type: CREATE_POST_SUCCESS,
+        payload: data.post,
+      });
+
+      enqueueSnackbar({
+        message: "Post created successfully!",
+        variant: "success",
+      });
+    } catch (error) {
+      let errorMessage = "Post creation failed.";
+
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || error.message;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
+      enqueueSnackbar({
+        message: errorMessage,
+        variant: "error",
+      });
+
+      dispatch({
+        type: CREATE_POST_FAILURE,
         payload: errorMessage, // Dispatch failure action with error message
       });
     }

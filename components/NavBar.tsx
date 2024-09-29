@@ -8,6 +8,7 @@ import { jwtDecode } from "jwt-decode";
 import LogoutPopup from "./LogoutPopup"; // Import the LogoutPopup
 import { logout } from "@/app/store/actions/auth.actions";
 import { useRouter } from "next/navigation";
+import CreatePostPopup from "./CreatePostPopup";
 
 interface DecodedToken {
   email: string;
@@ -19,6 +20,7 @@ const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isLogoutPopupVisible, setLogoutPopupVisible] = useState(false);
+  const [isCreatePostPopupVisible, setCreatePostPopupVisible] = useState(false);
 
   const getEmailFromToken = () => {
     try {
@@ -47,7 +49,13 @@ const Navbar: React.FC = () => {
     setLogoutPopupVisible(false);
   };
 
-  const handleAddPost = () => {};
+  const handleAddPost = () => {
+    setCreatePostPopupVisible(true);
+  };
+
+  const closeCreatePostPopup = () => {
+    setCreatePostPopupVisible(false);
+  };
 
   return (
     <>
@@ -95,6 +103,16 @@ const Navbar: React.FC = () => {
           message="Are you sure you want to logout?"
           onConfirm={confirmLogout}
           onCancel={cancelLogout}
+        />
+      )}
+
+      {isCreatePostPopupVisible && (
+        <CreatePostPopup
+          title="Create New Post" // Set title
+          message="Fill in the details to create a new post." // Set message
+          onConfirm={closeCreatePostPopup} // onConfirm can be a close function or any action you want
+          onCancel={closeCreatePostPopup} // Pass the onCancel function
+          displayButtons={false}
         />
       )}
     </>
