@@ -9,7 +9,7 @@ interface PopupProps {
 
 const withPopup = (Component: React.FC<PopupProps>) => {
   const WrappedComponent: React.FC<PopupProps> = (props: PopupProps) => (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white p-4 rounded-lg shadow-lg w-96">
         <h2 className="text-xl font-bold mb-4 font-montserrat">
           {props.title}

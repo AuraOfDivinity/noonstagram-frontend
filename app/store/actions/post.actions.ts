@@ -7,6 +7,7 @@ import {
   FETCH_LIKED_POSTS_FAILURE,
   FETCH_LIKED_POSTS_REQUEST,
   FETCH_LIKED_POSTS_SUCCESS,
+  REMOVE_FROM_LIKED_POSTS,
 } from "@/constants/post.constants";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
@@ -26,7 +27,6 @@ export const fetchPosts =
           Authorization: `Bearer ${token}`,
         },
       });
-
       dispatch({
         type: FETCH_POSTS_SUCCESS,
         payload: data,
@@ -97,10 +97,14 @@ export const unlikePost =
           },
         }
       );
-
       dispatch({
         type: UNLIKE_POST_SUCCESS,
-        payload: data.post,
+        payload: data.post, // Ensure payload contains the post ID
+      });
+
+      dispatch({
+        type: REMOVE_FROM_LIKED_POSTS,
+        payload: data.post, // Ensure payload contains the post ID
       });
 
       enqueueSnackbar({
@@ -108,7 +112,7 @@ export const unlikePost =
         variant: "success",
       });
     } catch (error) {
-      console.error("Failed to like post", error);
+      console.error("Failed to unlike post", error);
     }
   };
 
@@ -126,7 +130,7 @@ export const fetchLikedPosts =
 
       dispatch({
         type: FETCH_LIKED_POSTS_SUCCESS,
-        payload: data, // Assuming data is the array of liked posts
+        payload: data,
       });
     } catch (error) {
       let errorMessage = "Fetch Liked Posts Failed."; // Default error message

@@ -7,6 +7,7 @@ import {
   FETCH_LIKED_POSTS_SUCCESS,
   FETCH_LIKED_POSTS_FAILURE,
   UNLIKE_POST_SUCCESS,
+  REMOVE_FROM_LIKED_POSTS,
 } from "@/constants/post.constants";
 import { UPDATE_POST_WITH_COMMENT } from "@/constants/comment.constants";
 import { PostAction } from "@/types/post-action.types";
@@ -51,13 +52,19 @@ export const postReducer = (
         ),
       };
     case UPDATE_POST_WITH_COMMENT:
-      console.log("inside update post with comment");
       return {
         ...state,
         posts: state.posts.map((post) =>
           post.id === action.payload.postId
             ? { ...post, comments: [...post.comments, action.payload.comment] }
             : post
+        ),
+      };
+    case REMOVE_FROM_LIKED_POSTS:
+      return {
+        ...state,
+        likedPosts: state.likedPosts.filter(
+          (post) => post.id !== action.payload.id
         ),
       };
     default:
