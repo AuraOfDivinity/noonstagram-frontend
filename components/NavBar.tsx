@@ -38,14 +38,11 @@ const Navbar: React.FC = () => {
           Liked
         </Link>
       </div>
-
-      {/* Center - Add Post */}
-      <div className="cursor-pointer" onClick={handleAddPost}>
-        <AiOutlinePlusCircle size={32} className="text-blue-500" />
-      </div>
-
       {/* Right Side - User Info & Logout */}
       <div className="flex space-x-4 items-center">
+        <div className="cursor-pointer" onClick={handleAddPost}>
+          <AiOutlinePlusCircle size={32} className="text-blue-500" />
+        </div>
         <span className="font-lora">{`nileshi@gmail.com`}</span>
         <button
           onClick={handleLogout}
