@@ -2,14 +2,10 @@ import {
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
+  UPDATE_POST_WITH_COMMENT,
 } from "@/constants/comment.constants";
 import axios from "axios";
 import { Dispatch } from "redux";
-import { fetchPosts } from "./post.actions";
-import {
-  FETCH_POSTS_REQUEST,
-  FETCH_POSTS_SUCCESS,
-} from "@/constants/post.constants";
 import { RootState } from "../reducers";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -37,19 +33,10 @@ export const submitComment =
         type: ADD_COMMENT_SUCCESS,
         payload: response.data.comment,
       });
-      dispatch({ type: FETCH_POSTS_REQUEST });
-
-      const { data } = await axios.get(`${API_BASE_URL}/posts`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      console.log({ data });
 
       dispatch({
-        type: FETCH_POSTS_SUCCESS,
-        payload: data,
+        type: UPDATE_POST_WITH_COMMENT,
+        payload: { postId, comment: response.data.comment },
       });
     } catch (error) {
       let errorMessage = "Failed to submit comment.";

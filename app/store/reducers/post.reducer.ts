@@ -1,3 +1,4 @@
+import { UPDATE_POST_WITH_COMMENT } from "@/constants/comment.constants";
 import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
@@ -29,6 +30,15 @@ export const postReducer = (
         ...state,
         posts: state.posts.map((post) =>
           post.id === action.payload.id ? action.payload : post
+        ),
+      };
+    case UPDATE_POST_WITH_COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post.id === action.payload.postId
+            ? { ...post, comments: [...post.comments, action.payload.comment] }
+            : post
         ),
       };
     default:
