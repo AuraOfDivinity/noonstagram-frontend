@@ -2,14 +2,21 @@
 import React from "react";
 import PostFeed from "@/components/PostFeed";
 import { useAuth } from "@/hooks/useAuth";
+import NavBar from "@/components/NavBar"; // Import the Navbar component
 
 const FeedPage: React.FC = () => {
   useAuth();
+
   return (
-    <div className="flex justify-center min-h-screen bg-gray-100">
-      <div className="w-full sm:w-1/2 md:w-1/3">
-        <h1 className="text-2xl font-bold my-6 font-lora text-center">Feed</h1>
-        <PostFeed />
+    <div className="flex flex-col justify-center min-h-screen bg-gray-100">
+      {/* Navbar at the top */}
+      <NavBar />
+
+      {/* Main content */}
+      <div className="flex justify-center w-full">
+        <div className="w-full sm:w-1/2 md:w-1/3">
+          <PostFeed />
+        </div>
       </div>
     </div>
   );

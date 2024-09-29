@@ -18,12 +18,10 @@ const LikeButton: React.FC<LikeButtonProps> = ({ postId, isLiked }) => {
     } else {
       dispatch(unlikePost(postId));
     }
-
-    setIsScaling(true); // Trigger scaling effect
-
+    setIsScaling(true);
     setTimeout(() => {
-      setIsScaling(false); // Reset scaling after animation
-    }, 300); // Duration of the animation
+      setIsScaling(false);
+    }, 300);
   };
 
   return (
@@ -38,4 +36,4 @@ const LikeButton: React.FC<LikeButtonProps> = ({ postId, isLiked }) => {
   );
 };
 
-export default LikeButton;
+export default React.memo(LikeButton);

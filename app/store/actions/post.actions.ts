@@ -24,8 +24,6 @@ export const fetchPosts =
         },
       });
 
-      console.log({ data });
-
       dispatch({
         type: FETCH_POSTS_SUCCESS,
         payload: data,

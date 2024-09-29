@@ -7,6 +7,7 @@ import {
 import axios from "axios";
 import { Dispatch } from "redux";
 import { RootState } from "../reducers";
+import { enqueueSnackbar } from "notistack";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -38,6 +39,11 @@ export const submitComment =
         type: UPDATE_POST_WITH_COMMENT,
         payload: { postId, comment: response.data.comment },
       });
+
+      enqueueSnackbar({
+        message: "Comment added successfully!",
+        variant: "success",
+      });
     } catch (error) {
       let errorMessage = "Failed to submit comment.";
       if (axios.isAxiosError(error)) {
@@ -49,6 +55,11 @@ export const submitComment =
       dispatch({
         type: ADD_COMMENT_FAILURE,
         payload: errorMessage,
+      });
+
+      enqueueSnackbar({
+        message: errorMessage,
+        variant: "error",
       });
     }
   };

@@ -1,4 +1,3 @@
-// src/components/PostFeed.tsx
 import React, { useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/reducers";
