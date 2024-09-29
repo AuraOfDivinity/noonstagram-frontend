@@ -15,6 +15,7 @@ const withPopup = (Component: React.FC<PopupProps>) => {
           {props.title}
         </h2>
         <p className="mb-6 font-lora">{props.message}</p>
+        <Component {...props} />
         <div className="flex justify-end space-x-2">
           <button
             onClick={props.onCancel}
@@ -30,7 +31,6 @@ const withPopup = (Component: React.FC<PopupProps>) => {
           </button>
         </div>
       </div>
-      <Component {...props} />
     </div>
   );
 

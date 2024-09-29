@@ -6,12 +6,10 @@ interface LogoutPopupProps {
   onCancel: () => void;
 }
 
-const LogoutPopup: React.FC<LogoutPopupProps> = ({}) => {
-  return (
-    <>
-      <p>Are you sure you want to logout?</p>
-    </>
-  );
+const LogoutPopup: React.FC<LogoutPopupProps> = () => {
+  // Since the HOC already handles the message and title display,
+  // this component does not need to render anything additional
+  return null;
 };
 
 export default withPopup(LogoutPopup);

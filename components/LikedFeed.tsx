@@ -33,7 +33,7 @@ const LikedFeed: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="grid grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-2 gap-2 p-4">
       {likedPosts.map((post) => (
         <LikedImage key={post.id} imageUrl={post.image_url} id={post.id} />
       ))}
