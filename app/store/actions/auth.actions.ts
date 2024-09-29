@@ -79,7 +79,7 @@ export const register = (name: string, email: string, password: string) => {
       });
 
       enqueueSnackbar({
-        message: "Logged in successfully!",
+        message: "Registered successfully!",
         variant: "success",
       });
 
