@@ -4,6 +4,8 @@ import { RootState } from "@/app/store/reducers";
 import PostItem from "./PostItem";
 import { fetchPosts } from "@/app/store/actions/post.actions";
 import { useAppDispatch } from "@/hooks/hooks";
+import Lottie from "lottie-react";
+import LoadingAnimation from "../app/animations/loading.json";
 
 const PostFeed: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
@@ -21,7 +23,11 @@ const PostFeed: React.FC = React.memo(() => {
   }, [fetchPostsIfAuthenticated]); // Use the callback in the dependency array
 
   if (loading) {
-    return <p>Loading posts...</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Lottie className="h-48" loop={true} animationData={LoadingAnimation} />
+      </div>
+    );
   }
 
   return (
